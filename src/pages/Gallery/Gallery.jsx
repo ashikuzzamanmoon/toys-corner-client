@@ -14,12 +14,12 @@ const Gallery = () => {
             })
     }, [])
     return (
-        <div className="mt-12">
+        <div className="mt-16">
             <div className="text-center">
-                <h2 className="text-5xl font-bold">Our Toys Gallery</h2>
-                <p>Welcome to Toys Gallery, your ultimate destination for all things toys! We take pride in offering a wide range of toys that cater to children of all ages and interests. </p>
+                <h2 className="text-5xl font-bold mb-6">Our Toys Gallery</h2>
+                <p className="mb-14">Welcome to Toys Gallery, your ultimate destination for <br /> all things toys! We take pride in offering a wide range <br /> of toys that cater to children of all ages and interests. </p>
             </div>
-            <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
                 {
                     toys?.map(toy => <GalleryCard key={toy._id} toy={toy}></GalleryCard>)
                 }
