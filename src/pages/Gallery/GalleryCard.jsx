@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
-import Rating from 'react-rating';
-import { FaRegStar, FaStar } from 'react-icons/fa';
-import { BiLike }from 'react-icons/bi'
+// import Rating from 'react-rating';
+// import { FaRegStar, FaStar } from 'react-icons/fa';
+import { BiLike } from 'react-icons/bi'
+import { Rating } from '@smastrom/react-rating'
+
+import '@smastrom/react-rating/style.css'
 
 const GalleryCard = ({ toy }) => {
     const { img, name, price, ratings, likes, old_price } = toy;
@@ -22,15 +25,16 @@ const GalleryCard = ({ toy }) => {
                 </div>
                 <div>
                     <p className='text-gray-600 font-semibold text-xl inline-flex items-center gap-2'> <BiLike></BiLike>Likes: {likes}</p>
-                    <p className='text-gray-600 mt-1 font-semibold text-xl'>Ratings:
+                    <div className='text-gray-600 mt-1 font-semibold text-xl flex '>
+                        Ratings:
+                      
+
                         <Rating
-                            placeholderRating={ratings}
-                            readonly
-                            emptySymbol={<FaRegStar></FaRegStar>}
-                            placeholderSymbol={<FaStar></FaStar>}
-                            fullSymbol={<FaStar></FaStar>}
-                        ></Rating>
-                    </p>
+                            style={{ maxWidth: 100 }}
+                            value={ratings}
+                              readOnly
+                        />
+                    </div>
                 </div>
             </div>
         </motion.div>
