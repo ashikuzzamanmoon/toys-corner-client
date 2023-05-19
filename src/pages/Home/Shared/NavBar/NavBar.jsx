@@ -1,12 +1,28 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../../providers/AuthProvider";
+import "react-tooltip/dist/react-tooltip.css";
+// import "./styles.css";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 
 const Navbar = () => {
+
+  const {user,logOut}=useContext(AuthContext);
+
     const navItems = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to='/allToys'>All Toys</Link></li>
-        <li><Link to='/myToys'>My Toys</Link></li>
+        {
+            user &&
+            <li><Link to='/myToys'>My Toys</Link></li>
+
+        }
+        {
+            user &&
+
         <li><Link to="/addtoys">Add Toys</Link></li>
+        }
         <li><Link>Blogs</Link></li>
     </>
     return (
@@ -33,7 +49,18 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Get started</a>
+{
+    user ?
+    <div className=" flex items-center gap-5">
+        <img id="title" src={user?.photoURL} className="w-9 h-8 rounded-full" alt="" />
+        <ReactTooltip anchorId='title' content={user.displayName}  />
+        <button className="btn btn-primary" onClick={logOut}>Logout</button>
+    </div>
+    :
+<Link to='/login'>    <button className="btn btn-primary">Login</button></Link>
+
+
+}
             </div>
         </div>
     );

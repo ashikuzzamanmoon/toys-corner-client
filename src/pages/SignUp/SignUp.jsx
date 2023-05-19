@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 
 const SignUp = () => {
@@ -20,8 +21,21 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                update(user,name,photo)
             })
             .catch(error => console.log(error))
+    }
+
+    const update=(user,name,photo)=>{
+        updateProfile(user, {
+            displayName: name, photoURL: photo
+          }).then(() => {
+            // Profile updated!
+            // ...
+          }).catch((error) => {
+            console.log(error);
+          });
+
     }
     return (
         <div className="hero min-h-screen bg-base-200">

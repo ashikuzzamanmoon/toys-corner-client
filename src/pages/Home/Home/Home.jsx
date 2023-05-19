@@ -6,7 +6,7 @@ import Banner from "../Banner/Banner";
 
 const Home = () => {
     return (
-        <div>
+        <div className="w-[1200px] mx-auto ">
             <div className="mt-12">
                 <Banner></Banner>
             </div>
