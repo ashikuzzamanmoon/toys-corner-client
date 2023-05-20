@@ -1,12 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
 
 
 const Login = () => {
-
-    const {signIn} = useContext(AuthContext);
+    const [error, setError]=useState('');
+    const [success, setSuccess] = useState('')
+    const { signIn, googleSignIn } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -19,12 +20,26 @@ const Login = () => {
         console.log(email, password);
 
         signIn(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            navigate(from, {replace: true})
-        })
-        .catch(error => console.log(error));
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                navigate(from, { replace: true })
+            })
+            .catch(error => console.log(error));
+    }
+
+    const handleGoogleSignIn = () => {
+
+        googleSignIn()
+            .then(result => {
+                const loggedUser=result.user;
+                console.log(loggedUser);
+                navigate(from, { replace: true });
+
+            })
+            .catch(error => {
+                setError(error.message)
+            })
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -58,12 +73,14 @@ const Login = () => {
                         </div>
                         <div className='flex justify-center items-center'>
                             <div>
-                                <button className="font-semibold flex items-center gap-2 text-xl btn btn-outline btn-secondary"> <img src="https://i.ibb.co/3T5SxcN/google.png" style={{ height: "18px" }} alt="" /> Google</button>
+                                <button onClick={handleGoogleSignIn} className="font-semibold flex items-center gap-2 text-xl btn btn-outline btn-secondary"> <img src="https://i.ibb.co/3T5SxcN/google.png" style={{ height: "18px" }} alt="" /> Google</button>
                             </div>
                         </div>
                         <div className='text-center mt-3'>
                             <p className='font-semibold'>Do not have an account?<Link className="text-secondary" to="/signup"> Please Register</Link> </p>
                         </div>
+                        <p className='text-secondary text-center'>{success}</p>
+                        <p className='text-secondary text-center'>{error}</p>
                     </div>
                 </div>
             </div>
