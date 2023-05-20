@@ -1,14 +1,15 @@
+import { Link } from "react-router-dom";
 
 
 const AllToysRow = ({ alltoys }) => {
-    const { _id, name, quantity, image, subCategory, toyName, price } = alltoys;
+    const { _id, name, quantity, image, subCategory, toyName, price } = alltoys || {};
     return (
         <tr>
             <td>
-                <div className="flex items-center space-x-3">
+                <div className="">
                     <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                            {image}
+                        <div className="mask mask-squircle w-16 h-16">
+                            <img src={image} alt="" />
                         </div>
                     </div>
                 </div>
@@ -17,18 +18,20 @@ const AllToysRow = ({ alltoys }) => {
                 {toyName}
             </td>
             <td>{name}</td>
-            <th>
+            <td>
                 {price}
-            </th>
-            <th>
+            </td>
+            <td>
                 {quantity}
-            </th>
-            <th>
+            </td>
+            <td>
                 {subCategory}
-            </th>
-            <th>
-                <button className="btn btn-secondary">View Details</button>
-            </th>
+            </td>
+            <td>
+                <Link to={`/details/${_id}`}>
+                    <button className="btn btn-secondary">View Details</button>
+                </Link>
+            </td>
         </tr>
     );
 };

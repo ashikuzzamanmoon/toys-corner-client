@@ -6,7 +6,8 @@ const AllToys = () => {
     const data = useLoaderData()
     console.log(data);
     return (
-        <div className="overflow-x-auto w-full mt-10">
+        <div className="overflow-x-auto w-full mt-12">
+            <h2 className="text-3xl text-center font-bold py-4">Collection of Toys</h2>
             <table className="table w-full">
                 {/* head */}
                 <thead>
@@ -28,8 +29,6 @@ const AllToys = () => {
                         ></AllToysRow>)
                     }
                 </tbody>
-                {/* foot */}
-
 
             </table>
         </div>
