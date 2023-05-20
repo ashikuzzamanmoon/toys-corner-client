@@ -3,8 +3,7 @@ import AllToysRow from "./AllToysRow";
 
 
 const AllToys = () => {
-    const data = useLoaderData()
-    console.log(data);
+    const data = useLoaderData();
     return (
         <div className="overflow-x-auto w-full mt-12">
             <h2 className="text-3xl text-center font-bold py-4">Collection of Toys</h2>

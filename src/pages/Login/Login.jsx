@@ -5,7 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 
 const Login = () => {
-    const [error, setError]=useState('');
+    const [error, setError] = useState('');
     const [success, setSuccess] = useState('')
     const { signIn, googleSignIn } = useContext(AuthContext);
     const location = useLocation();
@@ -19,21 +19,35 @@ const Login = () => {
         const password = form.password.value;
         console.log(email, password);
 
+        if (!/(?=.[0-9].[0-9])/.test(password)) {
+            return setError(" Ensure string has two digits")
+        }
+        else if (password.length < 6) {
+            return setError("Ensure Password length is 6");
+        }
+
+        setSuccess('')
+        setError('')
         signIn(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                setError('')
+                setSuccess("Successfully Login !")
                 navigate(from, { replace: true })
+                form.reset()
             })
             .catch(error => console.log(error));
     }
 
     const handleGoogleSignIn = () => {
-
+        setError('')
+        setSuccess('')
         googleSignIn()
             .then(result => {
-                const loggedUser=result.user;
+                const loggedUser = result.user;
                 console.log(loggedUser);
+                setSuccess("Successfully Login")
                 navigate(from, { replace: true });
 
             })
