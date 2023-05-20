@@ -1,7 +1,7 @@
 
 
 const MyToysRow = ({ toy }) => {
-    const { _id, image, toyName, price } = toy;
+    const { image, toyName, price } = toy;
     return (
         <tr className="">
             <td>

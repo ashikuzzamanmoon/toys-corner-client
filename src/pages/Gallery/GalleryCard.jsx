@@ -1,9 +1,6 @@
 import { motion } from 'framer-motion';
-// import Rating from 'react-rating';
-// import { FaRegStar, FaStar } from 'react-icons/fa';
 import { BiLike } from 'react-icons/bi'
 import { Rating } from '@smastrom/react-rating'
-
 import '@smastrom/react-rating/style.css'
 
 const GalleryCard = ({ toy }) => {
