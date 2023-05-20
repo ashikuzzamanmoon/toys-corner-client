@@ -75,9 +75,9 @@ const AddToys = () => {
                             <label className="input-group">
                                 <span>SubCategory</span>
                                 <select {...register("subCategory")} className="input input-bordered w-full">
-                                    <option value="truck">truck</option>
-                                    <option value="sportsCar">sportsCar</option>
-                                    <option value="policeCar">policeCar</option>
+                                    <option value="truck">Teddy Bear</option>
+                                    <option value="sportsCar">Unicorn Toy</option>
+                                    <option value="policeCar">Pet Toy</option>
                                 </select>
                             </label>
                         </div>
