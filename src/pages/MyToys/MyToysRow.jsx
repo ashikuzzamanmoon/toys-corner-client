@@ -20,7 +20,7 @@ const MyToysRow = ({ toy }) => {
                 {toyName}
             </td>
             <td>
-                {price}
+                $ {price}
             </td>
             <td>
                 <button className="btn btn-outline btn-secondary">Update</button>

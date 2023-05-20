@@ -1,12 +1,17 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 
 
 const SignUp = () => {
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, googleSignIn } = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSignUp = event => {
         event.preventDefault();
@@ -17,24 +22,52 @@ const SignUp = () => {
         const photo = form.photo.value;
         console.log(name, email, password, photo);
 
+        if (!/(?=.[0-9].[0-9])/.test(password)) {
+            return setError(" Ensure string has two digits")
+        }
+        else if (password.length < 6) {
+            return setError("Ensure Password length is 6");
+        }
+        setSuccess('')
+        setError('')
         createUser(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                update(user,name,photo)
+                update(user, name, photo);
+                setError('')
+                setSuccess("Successfully Login !")
+                navigate(from, { replace: true })
+                form.reset()
             })
             .catch(error => console.log(error))
     }
 
-    const update=(user,name,photo)=>{
+    const handleGoogleSignIn = () => {
+        setError('')
+        setSuccess('')
+        googleSignIn()
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                setSuccess("Successfully Login")
+                navigate(from, { replace: true });
+
+            })
+            .catch(error => {
+                setError(error.message)
+            })
+    }
+
+    const update = (user, name, photo) => {
         updateProfile(user, {
             displayName: name, photoURL: photo
-          }).then(() => {
+        }).then(() => {
             // Profile updated!
             // ...
-          }).catch((error) => {
+        }).catch((error) => {
             console.log(error);
-          });
+        });
 
     }
     return (
@@ -45,7 +78,7 @@ const SignUp = () => {
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <div className="card-body">
-                        <h2 className="text-2xl text-center font-bold">Please Login</h2>
+                        <h2 className="text-2xl text-center font-bold">Please Sign Up</h2>
                         <form onSubmit={handleSignUp}>
                             <div className="form-control">
                                 <label className="label">
@@ -81,12 +114,14 @@ const SignUp = () => {
                         </div>
                         <div className='flex justify-center items-center'>
                             <div>
-                                <button className="font-semibold flex items-center gap-2 text-xl btn btn-outline btn-secondary"> <img src="https://i.ibb.co/3T5SxcN/google.png" style={{ height: "18px" }} alt="" /> Google</button>
+                                <button onClick={handleGoogleSignIn} className="font-semibold flex items-center gap-2 text-xl btn btn-outline btn-secondary"> <img src="https://i.ibb.co/3T5SxcN/google.png" style={{ height: "18px" }} alt="" /> Google</button>
                             </div>
                         </div>
                         <div className='text-center mt-3'>
                             <p className='font-semibold'>Already have an account?<Link className="text-secondary" to="/login"> Please Login</Link> </p>
                         </div>
+                        <p className='text-secondary text-center'>{success}</p>
+                        <p className='text-secondary text-center'>{error}</p>
                     </div>
                 </div>
             </div>

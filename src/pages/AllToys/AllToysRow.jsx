@@ -19,7 +19,7 @@ const AllToysRow = ({ alltoys }) => {
             </td>
             <td>{name}</td>
             <td>
-                {price}
+                $ {price}
             </td>
             <td>
                 {quantity}
