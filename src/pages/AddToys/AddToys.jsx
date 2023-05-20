@@ -2,16 +2,31 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 
+import Swal from 'sweetalert2'
+
+
 const AddToys = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
-        console.log(data);
+       
         fetch('http://localhost:5000/addToys', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(data)
+        })
+        .then(res=>res.json())
+        .then(d=>{
+            if(d.insertedId)
+            {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Your toys successfully added',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                  })
+            }
         })
     }
 
@@ -167,8 +182,8 @@ const AddToys = () => {
                 <div className="flex justify-center mt-7">
                     <button className="btn btn-secondary w-full" >
                         <input className="submit-btn" value="Add Toy" type="submit" />
-
                     </button>
+     
                 </div>
             </form>
         </div>

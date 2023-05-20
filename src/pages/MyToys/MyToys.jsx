@@ -15,6 +15,20 @@ const MyToys = () => {
                 SetToys(data)
             })
     }, [user])
+
+    const handleDelete = (id) => {
+
+        fetch(`http://localhost:5000/myToys/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                const remaining = toys.filter(toy => toy._id !== id);
+                SetToys(remaining)
+            })
+    }
+
     return (
         <div className="overflow-x-auto w-full mt-12">
             <h2 className="text-3xl text-center font-bold py-4">Your Toys Collection</h2>
@@ -36,8 +50,8 @@ const MyToys = () => {
                 </thead>
                 <tbody>
                     {
-                        
-                        toys?.map(toy => <MyToysRow key={toy._id} toy={toy}></MyToysRow>)
+
+                        toys?.map(toy => <MyToysRow key={toy._id} toy={toy} handleDelete={handleDelete}></MyToysRow>)
                     }
                 </tbody>
             </table>
