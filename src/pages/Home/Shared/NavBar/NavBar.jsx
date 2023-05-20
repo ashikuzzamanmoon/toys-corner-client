@@ -8,7 +8,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const Navbar = () => {
 
-  const {user,logOut}=useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
     const navItems = <>
         <li><Link to="/">Home</Link></li>
@@ -21,7 +21,7 @@ const Navbar = () => {
         {
             user &&
 
-        <li><Link to="/addtoys">Add Toys</Link></li>
+            <li><Link to="/addtoys">Add Toys</Link></li>
         }
         <li><Link>Blogs</Link></li>
     </>
@@ -49,18 +49,16 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-{
-    user ?
-    <div className=" flex items-center gap-5">
-        <img id="title" src={user?.photoURL} className="w-9 h-8 rounded-full" alt="" />
-        <ReactTooltip anchorId='title' content={user.displayName}  />
-        <button className="btn btn-primary" onClick={logOut}>Logout</button>
-    </div>
-    :
-<Link to='/login'>    <button className="btn btn-primary">Login</button></Link>
-
-
-}
+                {
+                    user ?
+                        <div className=" flex items-center gap-5">
+                            <img id="title" src={user?.photoURL} className="w-9 h-8 rounded-full" alt="" />
+                            <ReactTooltip anchorId='title' content={user.displayName} />
+                            <button className="btn btn-primary" onClick={logOut}>Logout</button>
+                        </div>
+                        :
+                        <Link to='/login'>    <button className="btn btn-primary">Login</button></Link>
+                }
             </div>
         </div>
     );

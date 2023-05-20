@@ -9,7 +9,6 @@ const Gallery = () => {
         fetch('http://localhost:5000/toysGallery')
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setToys(data)
             })
     }, [])

@@ -14,7 +14,7 @@ const GalleryCard = ({ toy }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
         >
-            <img className="w-full h-[550px] rounded-lg" src={img} alt="" />
+            <img className="w-full h-[380px] md:h-[550px] rounded-lg" src={img} alt="" />
             <div className="mt-2 mb-7 flex justify-between items-center">
                 <div>
                     <p className="text-gray-600 mt-1 font-semibold text-xl line-through">Price: {old_price}</p>
