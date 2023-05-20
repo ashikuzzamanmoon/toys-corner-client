@@ -1,9 +1,7 @@
 
 
-const MyToysRow = ({ toy, handleDelete }) => {
+const MyToysRow = ({ toy, handleDelete, handleUpdate }) => {
     const { _id, image, toyName, price } = toy;
-
-    
 
     return (
         <tr className="">
@@ -26,7 +24,7 @@ const MyToysRow = ({ toy, handleDelete }) => {
                 $ {price}
             </td>
             <td>
-                <button className="btn btn-outline btn-secondary">Update</button>
+                <button onClick={()=> handleUpdate(_id)} className="btn btn-outline btn-secondary">Update</button>
             </td>
         </tr>
     );

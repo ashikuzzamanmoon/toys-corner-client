@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 
 import Swal from 'sweetalert2'
+import useTitle from "../../hook/useTitle";
 
 
 const AddToys = () => {
+    useTitle('AddToys')
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
        

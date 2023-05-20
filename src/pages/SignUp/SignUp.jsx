@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import useTitle from "../../hook/useTitle";
 
 
 const SignUp = () => {
+    useTitle('SignUp')
 
     const { createUser, googleSignIn } = useContext(AuthContext);
     const [error, setError] = useState('');

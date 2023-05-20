@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import useTitle from "../../hook/useTitle";
 
 
 const ErrorPage = () => {
+    useTitle('Error')
     return (
         <div>
             <section className='flex items-center h-screen p-16 text-gray-900'>

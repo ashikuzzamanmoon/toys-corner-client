@@ -1,6 +1,16 @@
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
+
 const Banner = () => {
+    useEffect(() => {
+        AOS.init();
+    }, [])
     return (
-        <div className="carousel w-full h-[600px]">
+        <div data-aos="flip-left"
+            data-aos-easing="ease-out-cubic"
+            data-aos-duration="2000" className="carousel w-full h-[600px]">
             <div id="slide1" className="carousel-item relative w-full">
                 <img src="https://img.freepik.com/free-photo/fluffy-toy-texture-close-up_23-2149686884.jpg?size=626&ext=jpg&uid=R101321192&ga=GA1.2.1999469744.1683008976&semt=ais" className="w-full rounded-xl" />
                 <div className="absolute h-full left-0 top-0 right-0  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] hover:bg-gradient-to-l rounded-xl">

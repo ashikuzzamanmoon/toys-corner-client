@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import MyToysRow from "./MyToysRow";
+import useTitle from "../../hook/useTitle";
 
 
 const MyToys = () => {
+    useTitle('MyToys')
     const { user } = useContext(AuthContext)
     console.log(user);
     const [toys, SetToys] = useState();
@@ -17,7 +19,6 @@ const MyToys = () => {
     }, [user])
 
     const handleDelete = (id) => {
-
         fetch(`http://localhost:5000/myToys/${id}`, {
             method: "DELETE"
         })
@@ -28,6 +29,18 @@ const MyToys = () => {
                 SetToys(remaining)
             })
     }
+
+    const handleUpdate = (id) => {
+        fetch(`http://localhost:5000/myToys/${id}`, {
+            method: "PATCH"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+            })
+    }
+
 
     return (
         <div className="overflow-x-auto w-full mt-12">
@@ -51,7 +64,12 @@ const MyToys = () => {
                 <tbody>
                     {
 
-                        toys?.map(toy => <MyToysRow key={toy._id} toy={toy} handleDelete={handleDelete}></MyToysRow>)
+                        toys?.map(toy => <MyToysRow
+                            key={toy._id}
+                            toy={toy}
+                            handleDelete={handleDelete}
+                            handleUpdate={handleUpdate}
+                        ></MyToysRow>)
                     }
                 </tbody>
             </table>
