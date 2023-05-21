@@ -23,7 +23,7 @@ const Navbar = () => {
 
             <li><Link to="/addtoys">Add Toys</Link></li>
         }
-        <li><Link>Blogs</Link></li>
+        <li><Link to="blog">Blogs</Link></li>
     </>
     return (
         <div className="navbar bg-base-200">
