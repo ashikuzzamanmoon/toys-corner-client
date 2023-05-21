@@ -19,15 +19,6 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
-
-        if (!/(?=.[0-9].[0-9])/.test(password)) {
-            return setError(" Ensure string has two digits")
-        }
-        else if (password.length < 6) {
-            return setError("Ensure Password length is 6");
-        }
-
         setSuccess('')
         setError('')
         signIn(email, password)
@@ -71,13 +62,13 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="text" name="email" placeholder="email" className="input input-bordered" />
+                                <input type="text" name="email" placeholder="email" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" name="password" placeholder="password" className="input input-bordered" />
+                                <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                             </div>
                             <div className="form-control mt-6">
                                 <input className="btn btn-secondary" type="submit" value="Login" />

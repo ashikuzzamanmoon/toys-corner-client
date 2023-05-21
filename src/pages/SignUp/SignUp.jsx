@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import useTitle from "../../hook/useTitle";
@@ -8,12 +8,12 @@ import useTitle from "../../hook/useTitle";
 const SignUp = () => {
     useTitle('SignUp')
 
-    const { createUser, googleSignIn } = useContext(AuthContext);
+    const { createUser, googleSignIn,logOut } = useContext(AuthContext);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const location = useLocation();
+
     const navigate = useNavigate();
-    const from = location.state?.from?.pathname || '/';
+ 
 
     const handleSignUp = event => {
         event.preventDefault();
@@ -39,8 +39,10 @@ const SignUp = () => {
                 update(user, name, photo);
                 setError('')
                 setSuccess("Successfully Login !")
-                navigate(from, { replace: true })
                 form.reset()
+                logOut();
+                navigate('/login')
+
             })
             .catch(error => console.log(error))
     }
@@ -53,7 +55,7 @@ const SignUp = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
                 setSuccess("Successfully Login")
-                navigate(from, { replace: true });
+                navigate('/');
 
             })
             .catch(error => {
@@ -86,19 +88,19 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="text" name="name" placeholder="name" className="input input-bordered" />
+                                <input type="text" name="name" placeholder="name" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="text" name="email" placeholder="email" className="input input-bordered" />
+                                <input type="text" name="email" placeholder="email" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" name="password" placeholder="password" className="input input-bordered" />
+                                <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">

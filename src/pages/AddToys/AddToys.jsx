@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
-
 import Swal from 'sweetalert2'
 import useTitle from "../../hook/useTitle";
 
@@ -10,7 +9,7 @@ const AddToys = () => {
     useTitle('AddToys')
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
-       
+
         fetch('http://localhost:5000/addToys', {
             method: 'POST',
             headers: {
@@ -18,24 +17,24 @@ const AddToys = () => {
             },
             body: JSON.stringify(data)
         })
-        .then(res=>res.json())
-        .then(d=>{
-            if(d.insertedId)
-            {
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Your toys successfully added',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                  })
-            }
-        })
+            .then(res => res.json())
+            .then(d => {
+                if (d.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Your toys successfully added',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
+                }
+            })
     }
 
 
     const { user } = useContext(AuthContext)
     return (
         <div className=" bg-red-50 py-6 px-16 mt-16">
+         
             <h2 className="text-center text-3xl font-bold py-5">Add Your Toys</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {errors.exampleRequired && <span>This field is required</span>}
@@ -78,14 +77,14 @@ const AddToys = () => {
 
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Your SubCategory</span>
+                            <span className="label-text">SubCategory</span>
                         </label>
                         <label className="input-group">
                             <span>SubCategory</span>
                             <select {...register("subCategory")} className="input input-bordered w-full">
-                                <option value="truck">Teddy Bear</option>
-                                <option value="sportsCar">Unicorn Toy</option>
-                                <option value="policeCar">Pet Toy</option>
+                                <option value="teddy">Teddy Bear</option>
+                                <option value="unicorn">Unicorn Toy</option>
+                                <option value="pet">Pet Toy</option>
                             </select>
                         </label>
                     </div>
@@ -185,7 +184,7 @@ const AddToys = () => {
                     <button className="btn btn-secondary w-full" >
                         <input className="submit-btn" value="Add Toy" type="submit" />
                     </button>
-     
+
                 </div>
             </form>
         </div>

@@ -2,10 +2,16 @@ import { RxCounterClockwiseClock } from 'react-icons/rx';
 import { GoKey } from 'react-icons/go';
 import { BsRocketFill } from 'react-icons/bs';
 import { TbSunHigh } from 'react-icons/tb';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 const Services = () => {
+    useEffect(() => {
+        AOS.init();
+    }, [])
     return (
-        <div>
+        <div data-aos="zoom-in">
             <h2 className="text-5xl font-bold text-center mb-12">Our Services</h2>
             <div className="border text-black mb-12">
                 <div className=' flex flex-col md:flex-row justify-between items-center px-20 py-14'>

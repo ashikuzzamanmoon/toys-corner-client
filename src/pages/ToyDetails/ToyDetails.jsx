@@ -14,7 +14,7 @@ const ToyDetails = () => {
         <div>
             <h2 className="text-3xl font-bold text-center mt-16">Your Toy Details</h2>
             <div className="flex justify-center py-8 ">
-                <div className="card lg:card-side bg-base-100 shadow-xl w-3/4">
+                <div className="card lg:card-side bg-base-100 shadow-xl w-3/4 h-auto">
                     <figure><img className="w-80" src={image} alt="Album" /></figure>
                     <div className="card-body">
                         <h2 className="card-title">Toy Name: {toyName}</h2>
