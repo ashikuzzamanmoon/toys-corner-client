@@ -8,7 +8,7 @@ import useTitle from "../../hook/useTitle";
 const Login = () => {
     useTitle('Login')
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState('')
+    const [success, setSuccess] = useState('');
     const { signIn, googleSignIn } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Login = () => {
                 navigate(from, { replace: true })
                 form.reset()
             })
-            .catch(error => console.log(error));
+            .catch(error => setError(error));
     }
 
     const handleGoogleSignIn = () => {
@@ -86,8 +86,9 @@ const Login = () => {
                         <div className='text-center mt-3'>
                             <p className='font-semibold'>Do not have an account?<Link className="text-secondary" to="/signup"> Please Register</Link> </p>
                         </div>
-                        <p className='text-secondary text-center'>{success}</p>
-                        <p className='text-secondary text-center'>{error}</p>
+                        
+                        <p className='text-green-500 text-center'>{success}</p>
+                        <p className='text-red-600 text-center'>{error}</p>
                     </div>
                 </div>
             </div>

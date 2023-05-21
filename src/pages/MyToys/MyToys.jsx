@@ -10,7 +10,7 @@ const MyToys = () => {
     const { user } = useContext(AuthContext)
     const [toys, SetToys] = useState();
     useEffect(() => {
-        fetch(`http://localhost:5000/addToys/${user?.email}`)
+        fetch(`https://assignment-11-server-side-rho.vercel.app/addToys/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -31,7 +31,7 @@ const MyToys = () => {
             if (result.isConfirmed) {
 
 
-                fetch(`http://localhost:5000/myToys/${id}`, {
+                fetch(`https://assignment-11-server-side-rho.vercel.app/myToys/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
@@ -52,14 +52,26 @@ const MyToys = () => {
     }
 
 
+    const handleAscending=()=>{
+        const sorting=[...toys].sort((a,b)=>a.price - b.price);
+        SetToys(sorting)
+    }
+    const handleDescending=()=>{
+        const sorting=[...toys].sort((a,b)=>b.price - a.price);
+        SetToys(sorting)
+    }
+
 
     return (
         <div className="overflow-x-auto w-full mt-12">
             <h2 className="text-3xl text-center font-bold py-4">Your Toys Collection</h2>
+            <div className="btn-group mb-5 flex justify-end">
+                <button onClick={handleAscending} className="btn btn-active">ASCENDING</button>
+                <button onClick={handleDescending} className="btn">DESCENDING</button>
+            </div>
             <table className="table w-full">
                 <thead>
                     <tr>
-
                         <th>DELETE</th>
                         <th>Image</th>
                         <th>TOY NAME</th>

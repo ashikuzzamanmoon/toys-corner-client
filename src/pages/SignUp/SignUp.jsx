@@ -44,7 +44,7 @@ const SignUp = () => {
                 navigate('/login')
 
             })
-            .catch(error => console.log(error))
+            .catch(error => setError(error))
     }
 
     const handleGoogleSignIn = () => {

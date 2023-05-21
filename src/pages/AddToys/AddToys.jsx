@@ -10,7 +10,7 @@ const AddToys = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
 
-        fetch('http://localhost:5000/addToys', {
+        fetch('https://assignment-11-server-side-rho.vercel.app/addToys', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

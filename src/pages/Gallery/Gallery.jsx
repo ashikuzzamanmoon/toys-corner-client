@@ -6,7 +6,7 @@ const Gallery = () => {
     const [toys, setToys] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/toysGallery')
+        fetch('https://assignment-11-server-side-rho.vercel.app/toysGallery')
             .then(res => res.json())
             .then(data => {
                 setToys(data)
